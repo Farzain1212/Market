@@ -1,0 +1,638 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+/* Login / Registration */
+#canvas-basic {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.log-reg-cont {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1);
+    transition: 1s ease;
+}
+
+.shrink {
+    transform: scale(0) !important;
+    pointer-events: none !important;
+}
+
+.container {
+    position: relative;
+    max-width: 850px;
+    width: 100%;
+    background: #fff;
+    padding: 40px 30px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    perspective: 2700px;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    transition: .5s ease;
+}
+
+.container .cover {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 50%;
+    z-index: 98;
+    transition: all 1s ease;
+    transform-origin: left;
+    transform-style: preserve-3d;
+}
+
+.container #flip:checked~.cover {
+    transform: rotateY(-180deg);
+}
+
+.container .cover :is(.front, .back) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: aliceblue;
+}
+
+.cover .back {
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+
+.container .cover::before,
+.container .cover::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #36e1a7;
+    opacity: 0.5;
+    z-index: 12;
+}
+
+.container .cover::after {
+    opacity: 0.3;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+
+.container .cover img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 10;
+}
+
+.cover .text :is(.text-1, .text-2) {
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+
+.cover .text .text-2 {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.container .forms {
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    transition: .5s ease;
+}
+
+.container .form-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-content :is(.login-form, .signup-form) {
+    width: calc(100% / 2 - 25px);
+}
+
+.forms .form-content .title {
+    position: relative;
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    transition: .5s ease;
+}
+
+.forms .form-content .title:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 25px;
+    background: #40cc9d;
+}
+
+.forms .signup-form .title:before {
+    width: 20px;
+}
+
+.forms .form-content .input-boxes {
+    margin-top: 30px;
+}
+
+.forms .form-content .input-box {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+}
+
+.form-content .input-box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.form-content .input-box input:focus {
+    border-color: #40cc9d;
+}
+
+.form-content .input-box i {
+    position: absolute;
+    color: #40cc9d;
+    font-size: 17px;
+}
+
+.forms .form-content .text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.forms .form-content .text a {
+    text-decoration: none;
+}
+
+.forms .form-content .text a:hover {
+    text-decoration: underline;
+}
+
+.forms .form-content .button {
+    color: #fff;
+    margin-top: 40px;
+}
+
+.forms .form-content .button input {
+    color: #fff;
+    background: #40cc9d;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.forms .form-content .button input:hover {
+    background: #3cbd92;
+}
+
+.forms .form-content label {
+    color: rgb(40 173 129);
+    cursor: pointer;
+}
+
+.forms .form-content label:hover {
+    text-decoration: underline;
+}
+
+.forms .form-content :is(.login-text, .sign-up-text) {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.container #flip {
+    display: none;
+}
+
+@media (max-width: 730px) {
+    .container .cover {
+        display: none;
+    }
+
+    .form-content :is(.login-form, .signup-form) {
+        width: 100%;
+    }
+
+    .form-content .signup-form {
+        display: none;
+    }
+
+    .container #flip:checked~.forms .signup-form {
+        display: block;
+    }
+
+    .container #flip:checked~.forms .login-form {
+        display: none;
+    }
+}
+
+/* Login / Registration fin */
+
+/* Main Market */
+.body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    transition: 1s ease;
+    transform: scale(1);
+}
+
+.body .market-cont {
+    max-height: 750px;
+    max-width: 1400px;
+    height: 100%;
+    width: 100%;
+    background: #419f7f;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 9px 3px #00000066;
+}
+
+/* Main market Left  */
+.body .market-cont .left {
+    height: 84%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.body .market-cont .left h1 {
+    text-align: center;
+}
+
+.body .market-cont .left .nav {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+}
+
+.body .market-cont .left .nav p {
+    font-size: 3vh;
+    cursor: pointer;
+}
+
+.body .market-cont .left .nav p i {
+    transition: .5s ease;
+}
+
+.body .market-cont .left .nav p:hover i {
+    color: aliceblue;
+}
+
+.body .market-cont .left .profile {
+    display: flex;
+    height: 10vh;
+    width: 90%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.body .market-cont .left .profile .left {
+    overflow: hidden;
+    border-radius: 50%;
+    width: 25%;
+}
+
+.body .market-cont .left .profile .left img {
+    height: 100%;
+}
+
+.body .market-cont .left .profile .right {
+    width: 60%;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: none;
+}
+
+.body .market-cont .left .profile .right p {
+    font-size: 2.5vh;
+}
+
+.white {
+    color: aliceblue;
+    cursor: pointer;
+}
+
+/* Main market Left fin */
+
+/* Main market Right  */
+.body .market-cont .right {
+    height: 96%;
+    width: 78%;
+    border-radius: 50px;
+    background: white;
+    box-shadow: inset 0 0 17px 6px #00000062;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: 1s ease;
+}
+
+.body .market-cont .right .search {
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 1vh;
+}
+
+.body .market-cont .right .search i {
+    font-size: 3vh;
+}
+
+.body .market-cont .right .search input[type=text] {
+    height: 5vh;
+    width: 25vw;
+    padding: 0 1vh;
+    outline: none;
+    border: none;
+    background: transparent;
+    border-bottom: 3px solid #419f7f;
+    margin: 0 2vh;
+    font-size: 2vh;
+}
+
+.body .market-cont .right .search input[type=text]::placeholder {
+    font-size: 2vh;
+}
+
+.body .market-cont .right .item-cont {
+    height: 86%;
+    width: 92%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.body .market-cont .right .item-cont::-webkit-scrollbar {
+    background: transparent;
+}
+
+.body .market-cont .right .item-cont::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #66f2c2 20%, transparent);
+    border-radius: 13px;
+}
+
+.body .market-cont .right .item-cont .item {
+    background: #66f2c2;
+    width: 26%;
+    height: 45vh;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px 2px #00000047;
+    margin: 2vh;
+}
+
+.body .market-cont .right .item-cont .item .top {
+    background: white;
+    height: 13vh;
+    width: 12vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 17px;
+    box-shadow: inset 0 0 10px 3px #00000038;
+    transition: 1s ease;
+}
+
+.body .market-cont .right .item-cont .item .top img {
+    height: 10vh;
+    filter: drop-shadow(1px 1px 4px #000000a6);
+}
+
+.body .market-cont .right .item-cont .item .bottom {
+    height: 27vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 14vw;
+}
+
+.body .market-cont .right .item-cont .item .bottom h1 {
+    text-transform: capitalize;
+}
+
+.body .market-cont .right .item-cont .item .bottom button {
+    width: 11vw;
+    height: 5vh;
+    border-radius: 11px;
+    border: none;
+    font-size: 2.5vh;
+    box-shadow: 0 0 6px 0px #0000007a;
+    background: #419f7f;
+    color: aliceblue;
+    transition: 1s ease;
+}
+
+.body .market-cont .right .item-cont .item .bottom button:active {
+    box-shadow: inset 0 0 6px 0px #0000007a;
+}
+
+.body .market-cont .right .item-cont .item .bottom input[type=number] {
+    width: 5vw;
+    height: 4vh;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* Main market Right fin */
+
+/* Cart */
+.body .market-cont .cart-cont {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #50505094;
+    z-index: 1;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .6s ease;
+}
+
+.body .market-cont .cart-cont .cart {
+    background: white;
+    width: 38vw;
+    padding: 4vh;
+    border-radius: 19px;
+    box-shadow: 0 0 12px 4px #00000052;
+    max-height: 500px;
+}
+
+.body .market-cont .cart-cont .cart hr {
+    background: #16e99e;
+    height: 0.2vh;
+    border-radius: 37%;
+}
+
+.body .market-cont .cart-cont .cart .cartItems-list {
+    overflow-y: scroll;
+    max-height: 350px;
+}
+
+.body .market-cont .cart-cont .cart .cartItems-list::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+}
+
+.body .market-cont .cart-cont .cart .cartItems-list::-webkit-scrollbar-thumb {
+    background: #16e99e;
+    border-radius: 50%;
+}
+
+.body .market-cont .cart-cont .cart .cartItems-list .selItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.body .market-cont .cart-cont .cart .cartItems-list .selItem img {
+    height: 7vh;
+    width: 4vw;
+}
+
+.body .market-cont .cart-cont .cart .cartItems-list .selItem p {
+    font-size: 2.7vh;
+    text-transform: capitalize;
+}
+
+.body .market-cont .cart-cont .cart .cartItems-list .selItem p.x {
+    font-family: 'Patrick Hand', cursive;
+    cursor: pointer;
+    color: #1b8d65;
+}
+
+.body .market-cont .cart-cont .cart .total {
+    display: flex;
+    justify-content: space-around;
+}
+
+.body .market-cont .cart-cont .cart .btns {
+    display: flex;
+    justify-content: space-evenly;
+    height: 7vh;
+}
+
+.body .market-cont .cart-cont .cart .btns button:nth-child(1) {
+    background: aliceblue;
+    color: black;
+}
+
+.body .market-cont .cart-cont .cart .btns button {
+    width: 9vw;
+    border-radius: 15px;
+    border: none;
+    background: #59947f;
+    color: aliceblue;
+    font-size: 2.2vh;
+    font-weight: 700;
+    height: 8vh;
+    box-shadow: 0 0 5px 0px #000000c7;
+}
+
+/* Cart fin */
+
+/* Main Market fin */
+
+/* Loading */
+.load {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background: #fcfefc;
+    transform: scale(1);
+    transition: .7s ease;
+}
+
+/* Loading fin */
+
+/* Light/Dark mode */
+.mode {
+    position: fixed;
+    bottom: 7vh;
+    right: 10vh;
+    background: #fff;
+    border-radius: 50%;
+    height: 9vh;
+    width: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 7px 2px #0000004d;
+    transition: 1s ease;
+}
+
+.mode img {
+    height: 6vh;
+    position: absolute;
+}
+
+.darkbg {
+    background: #333 !important;
+}
+
+.lightclr {
+    color: #fff !important;
+}
+
+/* Light/Dark mode fin */
